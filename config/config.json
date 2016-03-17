@@ -1,0 +1,17 @@
+{
+  "development": {
+    "username": null,
+    "password": null,
+    "database": "cart_development",
+    "storage": "cart_development.db",
+    "dialect": "sqlite"
+  },
+  "test": {
+    "username": null,
+    "password": null,
+    "database": "cart_test",
+    "storage": "cart_test.db",
+    "dialect": "sqlite",
+    "logging": false
+  }
+}
