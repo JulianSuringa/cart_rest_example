@@ -90,7 +90,7 @@ router.get('/:cart_id/items/:item_id', function(req, res, next) {
 
 // Create new shopping cart item
 router.post('/:cart_id/items', function(req, res, next) {
-  req.cart.createShoppingCartItem({ name: req.body.name }).then(function(newItem) {
+  req.cart.createShoppingCartItem({ description: req.body.description }).then(function(newItem) {
     res.json(newItem.toJSON());
   }).error(next);
 });
@@ -103,8 +103,8 @@ router.delete('/:cart_id/items/:item_id', function(req, res, next) {
 });
 
 router.put('/:cart_id/items/:item_id', function(req, res, next) {
-  var name = req.body.name;
-  req.item.update({name: name}).then(function(updatedItem) {
+  var description = req.body.description;
+  req.item.update({description: description}).then(function(updatedItem) {
     res.json(updatedItem.toJSON());
   }).error(next);
 });

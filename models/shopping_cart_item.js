@@ -1,6 +1,6 @@
 module.exports = function(sequelize, DataTypes) {
   var ShoppingCartItem = sequelize.define('ShoppingCartItem', {
-    name: DataTypes.STRING
+    description: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

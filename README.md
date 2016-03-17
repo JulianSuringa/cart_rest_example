@@ -70,7 +70,7 @@ $ curl -X POST -H "Content-Type: application/json" \
 **Create an item in your new cart**
 ```bash
 $ curl -X POST -H "Content-Type: application/json" \
-  -d '{"name": "an item"}' \
+  -d '{"description": "an item"}' \
   http://localhost:3000/shopping_carts/1/items
 ```
 
@@ -79,15 +79,15 @@ $ curl -X POST -H "Content-Type: application/json" \
     "ShoppingCartId": 1,
     "createdAt": "2016-03-17T10:28:06.524Z",
     "id": 1,
-    "name": "an item",
+    "description": "an item",
     "updatedAt": "2016-03-17T10:28:06.524Z"
 }
 ```
 
-**Change the name of your new item**
+**Change the description of your new item**
 ```bash
 $ curl -X PUT -H "Content-Type: application/json" \
-  -d '{"name": "new name"}' \
+  -d '{"description": "new description"}' \
   http://localhost:3000/shopping_carts/1/items/1
 ```
 
@@ -96,7 +96,7 @@ $ curl -X PUT -H "Content-Type: application/json" \
     "ShoppingCartId": 1,
     "createdAt": "2016-03-17T10:28:06.524Z",
     "id": 1,
-    "name": "new name",
+    "description": "new description",
     "updatedAt": "2016-03-17T10:28:26.053Z"
 }
 ```
@@ -104,7 +104,7 @@ $ curl -X PUT -H "Content-Type: application/json" \
 **Create another item in your cart**
 ```bash
 $ curl -X POST -H "Content-Type: application/json" \
-  -d '{"name": "second item"}' \
+  -d '{"description": "second item"}' \
   http://localhost:3000/shopping_carts/1/items
 ```
 
@@ -113,7 +113,7 @@ $ curl -X POST -H "Content-Type: application/json" \
     "ShoppingCartId": 1,
     "createdAt": "2016-03-17T10:28:59.249Z",
     "id": 3,
-    "name": "second item",
+    "description": "second item",
     "updatedAt": "2016-03-17T10:28:59.249Z"
 }
 ```
@@ -131,21 +131,21 @@ $ curl http://localhost:3000/shopping_carts?include_items=1
                 "ShoppingCartId": 1,
                 "createdAt": "2016-03-17T10:28:06.524Z",
                 "id": 1,
-                "name": "new name",
+                "description": "new description",
                 "updatedAt": "2016-03-17T10:28:26.053Z"
             },
             {
                 "ShoppingCartId": 1,
                 "createdAt": "2016-03-17T10:28:44.680Z",
                 "id": 2,
-                "name": "second item",
+                "description": "second item",
                 "updatedAt": "2016-03-17T10:28:44.680Z"
             },
             {
                 "ShoppingCartId": 1,
                 "createdAt": "2016-03-17T10:28:59.249Z",
                 "id": 3,
-                "name": "second item",
+                "description": "second item",
                 "updatedAt": "2016-03-17T10:28:59.249Z"
             }
         ],
