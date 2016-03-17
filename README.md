@@ -3,7 +3,7 @@
 Example implementation of a REST API. Built with node.js, Express, SQLite, and Sequelize.
 
 ## Installation
-```
+```bash
 $ git clone https://github.com/alexpls/cart_rest_example
 $ cd cart_rest_example
 $ npm install
@@ -15,59 +15,149 @@ with the server (requests and responses) must be in JSON.
 ```
 Shopping Carts
 
-GET     /shopping_carts             Get a list of all shopping carts
-POST    /shopping_carts             Create a new shopping cart
-GET     /shopping_carts/[cart_id]   Get a specific shopping cart
-PUT     /shopping_carts/[cart_id]   Update a shopping cart
-DELETE  /shopping_carts/[cart_id]   Delete a shopping cart
+GET     /shopping_carts                              Get a list of all shopping carts
+POST    /shopping_carts                              Create a new shopping cart
+GET     /shopping_carts/[cart_id]                    Get a specific shopping cart
+PUT     /shopping_carts/[cart_id]                    Update a shopping cart
+DELETE  /shopping_carts/[cart_id]                    Delete a shopping cart
 
 
 Shopping Cart Items
 
-GET     /shopping_carts/[cart_id]/items           Get a list of all shopping cart items
-POST    /shopping_carts/[cart_id]/items           Create a new shopping cart item
-GET     /shopping_carts/[cart_id]/items/[item_id] Get a specific shopping cart item
-PUT     /shopping_carts/[cart_id]/items/[item_id] Update a shopping cart item
-DELETE  /shopping_carts/[cart_id]/items/[item_id] Delete a shopping cart item
+GET     /shopping_carts/[cart_id]/items              Get a list of all shopping cart items
+POST    /shopping_carts/[cart_id]/items              Create a new shopping cart item
+GET     /shopping_carts/[cart_id]/items/[item_id]    Get a specific shopping cart item
+PUT     /shopping_carts/[cart_id]/items/[item_id]    Update a shopping cart item
+DELETE  /shopping_carts/[cart_id]/items/[item_id]    Delete a shopping cart item
 ```
 
 ## Usage
 Starting the server:
-```
+```bash
 # To start the server make sure you're in the 'cart_rest_example'
 # root directory and run:
 $ bin/www
 
 # You may specify a custom port as an environment variable:
 $ PORT=8080 bin/www
+```
 
-# Once your server is running you can start making API requests to it:
+Once your server is running you can start making requests to it:
 
-# Create your first cart
-$ curl -X POST -H "Content-Type: application/json" -d '{"name": "my first cart"}' http://localhost:3000/shopping_carts
-{"id":1,"name":"my first cart","updatedAt":"2016-03-17T10:01:19.887Z","createdAt":"2016-03-17T10:01:19.887Z"}
+**Create your first cart**
+```bash
+$ curl -X POST -H "Content-Type: application/json" \
+  -d '{"name": "my first cart"}' \
+  http://localhost:3000/shopping_carts
+```
 
-# Create an item in your new cart
-$ curl -X POST -H "Content-Type: application/json" -d '{"name": "an item"}' http://localhost:3000/shopping_carts/1/items
-{"id":1,"name":"an item","ShoppingCartId":1,"updatedAt":"2016-03-17T10:02:42.301Z","createdAt":"2016-03-17T10:02:42.301Z"}
+```json
+{
+    "createdAt": "2016-03-17T10:27:12.983Z",
+    "id": 1,
+    "name": "my first cart",
+    "updatedAt": "2016-03-17T10:27:12.983Z"
+}
+```
 
-# Change the name of your new item
-$ curl -X PUT -H "Content-Type: application/json" -d '{"name": "new name"}' http://localhost:3000/shopping_carts/1/items/1
-{"id":1,"name":"new name","createdAt":"2016-03-17T10:05:42.156Z","updatedAt":"2016-03-17T10:07:18.559Z","ShoppingCartId":1}
+**Create an item in your new cart**
+```bash
+$ curl -X POST -H "Content-Type: application/json" \
+  -d '{"name": "an item"}' \
+  http://localhost:3000/shopping_carts/1/items
+```
 
-# Create another item in your cart
-$ curl -X POST -H "Content-Type: application/json" -d '{"name": "second item"}' http://localhost:3000/shopping_carts/1/items
-{"id":2,"name":"second item","ShoppingCartId":1,"updatedAt":"2016-03-17T10:12:15.477Z","createdAt":"2016-03-17T10:12:15.477Z"}
+```json
+{
+    "ShoppingCartId": 1,
+    "createdAt": "2016-03-17T10:28:06.524Z",
+    "id": 1,
+    "name": "an item",
+    "updatedAt": "2016-03-17T10:28:06.524Z"
+}
+```
 
-# Get a list of all carts, including their items
+**Change the name of your new item**
+```bash
+$ curl -X PUT -H "Content-Type: application/json" \
+  -d '{"name": "new name"}' \
+  http://localhost:3000/shopping_carts/1/items/1
+```
+
+```json
+{
+    "ShoppingCartId": 1,
+    "createdAt": "2016-03-17T10:28:06.524Z",
+    "id": 1,
+    "name": "new name",
+    "updatedAt": "2016-03-17T10:28:26.053Z"
+}
+```
+
+**Create another item in your cart**
+```bash
+$ curl -X POST -H "Content-Type: application/json" \
+  -d '{"name": "second item"}' \
+  http://localhost:3000/shopping_carts/1/items
+```
+
+```json
+{
+    "ShoppingCartId": 1,
+    "createdAt": "2016-03-17T10:28:59.249Z",
+    "id": 3,
+    "name": "second item",
+    "updatedAt": "2016-03-17T10:28:59.249Z"
+}
+```
+
+**Get a list of all carts, including their items**
+```bash
 $ curl http://localhost:3000/shopping_carts?include_items=1
 ```
 
-## Running the test suite
+```json
+[
+    {
+        "ShoppingCartItems": [
+            {
+                "ShoppingCartId": 1,
+                "createdAt": "2016-03-17T10:28:06.524Z",
+                "id": 1,
+                "name": "new name",
+                "updatedAt": "2016-03-17T10:28:26.053Z"
+            },
+            {
+                "ShoppingCartId": 1,
+                "createdAt": "2016-03-17T10:28:44.680Z",
+                "id": 2,
+                "name": "second item",
+                "updatedAt": "2016-03-17T10:28:44.680Z"
+            },
+            {
+                "ShoppingCartId": 1,
+                "createdAt": "2016-03-17T10:28:59.249Z",
+                "id": 3,
+                "name": "second item",
+                "updatedAt": "2016-03-17T10:28:59.249Z"
+            }
+        ],
+        "createdAt": "2016-03-17T10:27:12.983Z",
+        "id": 1,
+        "name": "my first cart",
+        "updatedAt": "2016-03-17T10:27:12.983Z"
+    }
+]
 ```
+
+## Running the test suite
+```bash
 # Make sure you're in the cart_rest_example root directory and run:
 $ npm install --dev
 $ mocha
+```
+
+```
 shopping cart items routes
   GET /shopping_carts/:id/items
 
