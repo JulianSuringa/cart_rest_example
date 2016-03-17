@@ -4,6 +4,13 @@ Example implementation of a REST API. Built with node.js, Express, SQLite, and S
 
 ## Installation
 ```bash
+# make sure sqlite3 is installed on your system
+# On Mac OS X (homebrew):
+$ brew install sqlite3
+# On Ubuntu/Debian
+$ sudo apt-get install sqlite3
+
+# Clone the repo and install dependencies
 $ git clone https://github.com/alexpls/cart_rest_example
 $ cd cart_rest_example
 $ npm install
@@ -154,6 +161,7 @@ $ curl http://localhost:3000/shopping_carts?include_items=1
 ```bash
 # Make sure you're in the cart_rest_example root directory and run:
 $ npm install --dev
+$ npm install -g mocha
 $ mocha
 ```
 
